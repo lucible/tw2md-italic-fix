@@ -594,7 +594,7 @@ public class Main implements Callable<Integer> {
 		
 		// internal links without display text
 		// this is so that I can use finding unlinked mentions of aliases to quickly re-link files
-		s = s.replaceAll("\\[\\[([^\|]*?)]]", "$1");
+		s = s.replaceAll("\\[\\[([^\\|]*?)]]", "$1");
 
 		// image links with sizing [img width=100 height=90 [image.png]]
 		s = s.replaceAll("\\[img *width=(\\d+) +height=(\\d+) +\\[([^]]*)]]", "![[$3" + escStr + "|$1x$2]]");
