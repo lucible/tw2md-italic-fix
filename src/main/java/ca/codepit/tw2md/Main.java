@@ -1007,7 +1007,8 @@ public class Main implements Callable<Integer> {
 		} else {
 			// sort out illegal characters and spaces, then clean up any doubling of illegal characters or spaces
 			newTag = newTag.replace(" ", spaceTagCharacterReplacement);
-			newTag = newTag.replaceAll("[^\\w1-9/_-]", illegalTagCharacterReplacement);
+			newTag = newTag.replaceAll("\\$:", illegalTagCharacterReplacement);
+			newTag = newTag.replaceAll("^\\w1-9/_-", illegalTagCharacterReplacement);
 
 			if (!spaceTagCharacterReplacement.isEmpty()) {
 				newTag = newTag.replaceAll(spaceTagCharacterReplacement + "+", spaceTagCharacterReplacement);
