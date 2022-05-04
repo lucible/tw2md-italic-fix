@@ -3,6 +3,7 @@ package ca.codepit.tw2md;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.DumperOptions;
 import picocli.CommandLine;
 
 import java.io.*;
@@ -752,7 +753,10 @@ public class Main implements Callable<Integer> {
 
 		StringBuilder md = new StringBuilder();
 		if (!data.isEmpty()) {
-			Yaml yaml = new Yaml();
+			final DumperOptions options = new DumperOptions();
+			options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+			options.setPrettyFlow(true);
+			Yaml yaml = new Yaml(options);
 			StringWriter writer = new StringWriter();
 			yaml.dump(data, writer);
 			md.append("---").append(NL);
