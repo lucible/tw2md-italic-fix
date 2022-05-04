@@ -570,6 +570,9 @@ public class Main implements Callable<Integer> {
 		
 		// handle cited blockquotes
 		s = s.replaceAll("^<<< +(.+$)", "<cite>$1</cite>");
+		
+		// description list (the definition)
+		s = Pattern.compile("^:+ +(.*$)").matcher(s).replaceAll(m -> renderDescList(m.group(1)));
 
 		// transcoding
 		s = s.replaceAll("\\{\\{([^]]*)}}", "![[$1]]");
@@ -903,6 +906,16 @@ public class Main implements Callable<Integer> {
 			}
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * convert definition list syntax to HTML tags
+	 */
+	private String renderDescList(String text) {
+		String definition = "<dl><dd>" + text + "</dd></dl>";
+		definition = definition.replaceAll("\\$", illegalTagCharacterReplacement);
+
+		return definition;
 	}
 	
 	/**
