@@ -567,6 +567,9 @@ public class Main implements Callable<Integer> {
 
 		// {{!!header-name}}
 		s = Pattern.compile("\\{\\{!!([^]]*)}}").matcher(s).replaceAll(m -> renderHeader(t, m.group(0), m.group(1)));
+		
+		// handle cited blockquotes
+		s = s.replaceAll("^<<< +(.+$)", "<cite>$1</cite>");
 
 		// transcoding
 		s = s.replaceAll("\\{\\{([^]]*)}}", "![[$1]]");
@@ -646,10 +649,12 @@ public class Main implements Callable<Integer> {
 
 		StringBuilder sb = new StringBuilder();
 
-		for (String l : block.subList(1, block.size() - 1)) {
+		for (String l : block.subList(1, block.size())) {
 			final ArrayList<String> list = new ArrayList<>();
 			list.add(l);
-			sb.append(("> " + renderTextBlock(t, list)).trim()).append(NL);
+			if (!renderTextBlock(t, list).equals("<<<")) {
+				sb.append(("> " + renderTextBlock(t, list)).trim()).append(NL);
+			}
 		}
 
 		return sb.toString().trim();
