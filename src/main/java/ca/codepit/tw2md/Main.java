@@ -635,6 +635,9 @@ public class Main implements Callable<Integer> {
 		// my custom macro
 		s = s.replaceAll("<<tkt +([^ ]+) +'([^']+)'>>", "[[$1]] - $2");
 		s = s.replaceAll("<<tkt +([^ ]+) *>>", "[[$1]]");
+		
+		// <<sus>> custom macro
+		s = s.replaceAll("<<sus>>", "sphygm.us");
 
 		// <<richlink "files/foo/bar.mp4">>
 		s = Pattern.compile("<<richlink +\"([^\"]+)\" *>>").matcher(s).replaceAll(m -> renderRichlink(m.group(1)));
