@@ -573,6 +573,19 @@ public class Main implements Callable<Integer> {
 		
 		// description list (the definition)
 		s = Pattern.compile("^:+ +(.*$)").matcher(s).replaceAll(m -> renderDescList(m.group(1)));
+		
+		// description list (the title)
+		s = s.replaceAll("^;( +.+$)", "##### $1");
+
+		// en and em dashes
+		s = s.replaceAll(" -- ", " – ");
+		s = s.replaceAll(" --- ", " ⁠— ");
+
+		// hard line breaks
+		s = s.replaceAll("^\"\"\".+$", "");
+
+		// personal external tiddlywiki link CSS replacement
+		s = s.replaceAll("@@.link (.+)@@", "_$1_");
 
 		// transcoding
 		s = s.replaceAll("\\{\\{([^]]*)}}", "![[$1]]");
