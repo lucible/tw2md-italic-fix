@@ -577,6 +577,9 @@ public class Main implements Callable<Integer> {
 
 		// tag macro
 		s = Pattern.compile("<<tag +([^>]+)>>").matcher(s).replaceAll(m -> renderTag(m.group(1)));
+		
+		// inline footnote macro
+		s = Pattern.compile("<<footnote +\"([^\"]+)\" +\"([^\"]+)\">>").matcher(s).replaceAll(m -> renderFootnote(m.group(1), m.group(2)));
 
 		// my custom macro
 		s = s.replaceAll("<<tkt +([^ ]+) +'([^']+)'>>", "[[$1]] - $2");
@@ -900,6 +903,23 @@ public class Main implements Callable<Integer> {
 			}
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * convert TiddlyWiki Danielo's pop-up footnotes plugin to Obsidian compatible footnotes
+	 * http://braintest.tiddlyspot.com/#PopupFootnotes
+	 */
+	private String renderFootnote(String slug, String note) {
+		String identifier = "[^" + slug + "]";
+		String fnote = identifier + ": " + note + " &%&";
+
+		identifier = identifier.replaceAll("\\$", illegalTagCharacterReplacement);
+		fnote = fnote.replaceAll("\\$", illegalTagCharacterReplacement);
+
+		String output = identifier + " " + fnote;
+
+		log.debug("Convert Footnote: {} {} -> {}", slug, note, output);
+		return output;
 	}
 
 	/**
