@@ -33,12 +33,47 @@ public class Main implements Callable<Integer> {
 
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
 
+	private static final String URI_HEADER = "_canonical_uri";
+	private static final String ALIASES_HEADER = "aliases";
+	private static final String AUTHOR_HEADER = "author";
+	private static final String CAPTION_HEADER = "caption";
+	private static final String COLOR_HEADER = "color";
+	private static final String CMCOLOR_HEADER = "comment-color";
+	private static final String CREATED_HEADER = "created";
+	private static final String CREATOR_HEADER = "creator";
+	private static final String DESC_HEADER = "description";
+	private static final String EXERCISE_HEADER = "exercise";
+	private static final String FOOTER_HEADER = "footer";
+	private static final String ICON_HEADER = "icon";
+	private static final String JOURNAL_HEADER = "journal";
+	private static final String LOG_HEADER = "log";
+	private static final String MEDITATION_HEADER = "meditation";
+	private static final String MODIFIED_HEADER = "modified";
+	private static final String MODIFIER_HEADER = "modifier";
+	private static final String MODULE_HEADER = "module-type";
+	private static final String MULTI_HEADER = "my-multiline-field";
+	private static final String PROJECT_HEADER = "project-work";
+	private static final String READING_HEADER = "reading";
+	private static final String REV_HEADER = "revision";
+	private static final String SOURCE_HEADER = "source";
 	private static final String TAGS_HEADER = "tags";
-	private static final String TYPE_HEADER = "type";
+	private static final String TEST_HEADER = "testing";
 	private static final String TITLE_HEADER = "title";
+	private static final String TITLECOLOR_HEADER = "title-color";
+	private static final String TRA_HEADER = "tra";
+	private static final String TRANSCLUDES_HEADER = "transcludes";
+	private static final String TYPE_HEADER = "type";
+	private static final String WEIGHT_HEADER = "weight";
 
 	private static final String ALIASES_FRONTMATTER = "aliases";
+	private static final String TITLE_FRONTMATTER = "title";
 	private static final String TAGS_FRONTMATTER = "tags";
+	private static final String CREATOR_FRONTMATTER = "creator";
+	private static final String CREATED_FRONTMATTER = "created";
+	private static final String MODIFIED_FRONTMATTER = "modified";
+	private static final String MODIFIER_FRONTMATTER = "modifier";
+	private static final String TYPE_FRONTMATTER = "type";
+
 	private static final String TIDDLERS_DIR = "/tiddlers";
 	private static final String TIDDLYWIKI_TYPE = "text/vnd.tiddlywiki";
 	private static final String OSX_DS_STORE_DIR = ".DS_Store";
@@ -761,6 +796,11 @@ public class Main implements Callable<Integer> {
 
 		Map<String, Object> data = new HashMap<>();
 
+		/*
+		 * START inserting header field data 
+		 */
+
+		// aliases
 		Optional.ofNullable(t.getHeader(TITLE_HEADER))
 						.filter(prefix -> !filename.equals(prefix + TIDDLER_EXT))
 						.ifPresent(s -> {
@@ -769,11 +809,140 @@ public class Main implements Callable<Integer> {
 							data.put(ALIASES_FRONTMATTER, ss);
 						});
 
+		// author
+		Optional.ofNullable(t.getHeader(AUTHOR_HEADER))
+				.ifPresent(v -> data.put(AUTHOR_HEADER, v));
+
+		// caption
+		Optional.ofNullable(t.getHeader(CAPTION_HEADER))
+				.ifPresent(v -> data.put(CAPTION_HEADER, v));
+
+		// color
+		Optional.ofNullable(t.getHeader(COLOR_HEADER))
+				.ifPresent(v -> data.put(COLOR_HEADER, v));
+
+		// comment-color
+		Optional.ofNullable(t.getHeader(CMCOLOR_HEADER))
+				.ifPresent(v -> data.put(CMCOLOR_HEADER, v));
+
+		// created
+		Optional.ofNullable(t.getHeader(CREATED_HEADER))
+				.ifPresent(created -> data.put(CREATED_HEADER, created));
+
+		// creator
+		Optional.ofNullable(t.getHeader(CREATOR_HEADER))
+				.ifPresent(creator -> data.put(CREATOR_FRONTMATTER, creator));
+
+		// description
+		Optional.ofNullable(t.getHeader(DESC_HEADER))
+				.ifPresent(v -> data.put(DESC_HEADER, v));
+
+		// exercise
+		Optional.ofNullable(t.getHeader(EXERCISE_HEADER))
+				.ifPresent(v -> data.put(EXERCISE_HEADER, v));
+
+		//footer
+		Optional.ofNullable(t.getHeader(FOOTER_HEADER))
+				.ifPresent(v -> data.put(FOOTER_HEADER, v));
+
+		// icon
+		Optional.ofNullable(t.getHeader(ICON_HEADER))
+				.ifPresent(v -> data.put(ICON_HEADER, v));
+
+		// journal
+		Optional.ofNullable(t.getHeader(JOURNAL_HEADER))
+				.ifPresent(v -> data.put(JOURNAL_HEADER, v));
+
+		// log
+		Optional.ofNullable(t.getHeader(LOG_HEADER))
+				.ifPresent(v -> data.put(LOG_HEADER, v));
+
+		// meditation
+		Optional.ofNullable(t.getHeader(MEDITATION_HEADER))
+				.ifPresent(v -> data.put(MEDITATION_HEADER, v));
+		
+		// modified
+		Optional.ofNullable(t.getHeader(MODIFIED_HEADER))
+				.ifPresent(v -> data.put(MODIFIED_HEADER, v));
+
+		// modifier
+		Optional.ofNullable(t.getHeader(MODIFIER_HEADER))
+				.ifPresent(v -> data.put(MODIFIER_HEADER, v));
+
+		// module-type
+		Optional.ofNullable(t.getHeader(MODULE_HEADER))
+				.ifPresent(v -> data.put(MODULE_HEADER, v));
+
+		//my-multiline-field
+		Optional.ofNullable(t.getHeader(MULTI_HEADER))
+				.ifPresent(v -> data.put(MULTI_HEADER, v));
+
+		// project-work
+		Optional.ofNullable(t.getHeader(PROJECT_HEADER))
+				.ifPresent(v -> data.put(PROJECT_HEADER, v));
+
+		// reading
+		Optional.ofNullable(t.getHeader(READING_HEADER))
+				.ifPresent(v -> data.put(READING_HEADER, v));
+
+		// revision
+		Optional.ofNullable(t.getHeader(REV_HEADER))
+				.ifPresent(v -> data.put(REV_HEADER, v));
+
+		// source
+		Optional.ofNullable(t.getHeader(SOURCE_HEADER))
+				.ifPresent(v -> data.put(SOURCE_HEADER, v));
+
+		// tags
 		Optional.ofNullable(t.getHeader(TAGS_HEADER))
 						.filter(s -> !s.isBlank())
 						.map(this::splitTags)
 						.map(this::renderTags)
 						.ifPresent(tags -> data.put(TAGS_FRONTMATTER, tags));
+
+		// testing
+		Optional.ofNullable(t.getHeader(TEST_HEADER))
+				.ifPresent(v -> data.put(TEST_HEADER, v));
+
+		// title
+		Optional.ofNullable(t.getHeader(TITLE_HEADER))
+				.ifPresent(v -> data.put(TITLE_HEADER, v));
+		/*
+		Optional.ofNullable(t.getHeader(TITLE_HEADER))
+						.filter(prefix -> !filename.equals(prefix + TIDDLER_EXT))
+						.ifPresent(s -> {
+							List<String> ss = new ArrayList<>();
+							ss.add(s);
+							data.put(TITLE_FRONTMATTER, ss);
+						});	
+		*/
+		
+		// title-color
+		Optional.ofNullable(t.getHeader(TITLECOLOR_HEADER))
+				.ifPresent(v -> data.put(TITLECOLOR_HEADER, v));
+
+		// tra (what tf was this)
+		Optional.ofNullable(t.getHeader(TRA_HEADER))
+				.ifPresent(v -> data.put(TRA_HEADER, v));
+		
+		// transcludes
+		Optional.ofNullable(t.getHeader(TRANSCLUDES_HEADER))
+				.ifPresent(v -> data.put(TRANSCLUDES_HEADER, v));
+
+		// type (switch to x-markdown for use in tiddlymark)
+		Optional.ofNullable(t.getHeader(TYPE_HEADER))
+						.ifPresent(s -> {
+							String ss = "text/x-markdown";
+							data.put(TYPE_HEADER, ss);
+						});
+
+		// weight
+		Optional.ofNullable(t.getHeader(WEIGHT_HEADER))
+				.ifPresent(v -> data.put(WEIGHT_HEADER, v));
+
+		/*
+		 * END inserting header field data
+		 */
 
 		StringBuilder md = new StringBuilder();
 		if (!data.isEmpty()) {
