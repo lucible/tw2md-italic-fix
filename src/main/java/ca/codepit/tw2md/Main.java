@@ -52,7 +52,7 @@ public class Main implements Callable<Integer> {
 	private final static Pattern SUPER_REGEX = Pattern.compile("\\^\\^");
 	private final static Pattern SUB_REGEX = Pattern.compile(",,");
 	private final static Pattern TITLE_REGEX = Pattern.compile("^(!+) *");
-	private final static Pattern BULLET_LIST_REGEX = Pattern.compile("^ *([-*]+) *");
+	private final static Pattern BULLET_LIST_REGEX = Pattern.compile("^ *([*]+) *");
 	private final static Pattern NUMBER_LIST_REGEX = Pattern.compile("^ *(#+) *");
 
 	enum BLOCK_TYPE {
@@ -340,7 +340,7 @@ public class Main implements Callable<Integer> {
 				if (line.startsWith("```")) bt = BLOCK_END;
 				if (line.startsWith("<<<")) bt = BLOCK_END;
 			} else {
-				if (line.startsWith("*") || line.startsWith("-")) {
+				if (line.startsWith("*") || line.startsWith("- ")) {
 					bt = BULLET_LIST;
 				} else if (line.startsWith("#")) {
 					bt = NUMBER_LIST;
