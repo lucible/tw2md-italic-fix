@@ -1,3 +1,10 @@
+---
+created: '20180317152015845'
+modified: '20210910025114852'
+title: TiddlyWiki Syntax
+type: text/x-markdown
+---
+
 # Inline Formatting
 ## Option
 

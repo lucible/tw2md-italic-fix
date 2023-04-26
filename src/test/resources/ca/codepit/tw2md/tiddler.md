@@ -1,6 +1,15 @@
 ---
-aliases: [Ansible]
-tags: ['#Ansible', '#Linux', '#Start', '#Foo_Troubleshooter']
+aliases:
+- Ansible
+created: '20160331184640237'
+modified: '20160331184758623'
+title: Ansible
+type: text/x-markdown
+tags:
+- '#Ansible'
+- '#Linux'
+- '#Start'
+- '#Foo_Troubleshooter'
 ---
 
 # Ansible

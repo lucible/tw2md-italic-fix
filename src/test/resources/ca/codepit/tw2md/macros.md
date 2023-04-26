@@ -1,9 +1,16 @@
 ---
-aliases: [Ansible]
-tags: ['#crew_ai', '#pixel_starships']
+aliases:
+- Ansible
+created: '20160331184640237'
+modified: '20160331184758623'
+title: Ansible
+type: text/x-markdown
+tags:
+- '#crew_ai'
+- '#pixel_starships'
 ---
 
-tag #develop and #21_6_0 and #t213
+tag #develop and #21.6.0 and #t213
 
 [[TICKET-9776]] - My custom macro
 
